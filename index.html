@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="MASt3R-Nav: WayPixel Navigation in Relative 3D Maps">
-  <meta name="keywords" content="MASt3R-Nav, Navigation, 3D, Visual Navigation">
+  <meta name="description"
+        content="MASt3R-Nav: WayPixel Navigation in Relative 3D Maps">
+  <meta name="keywords" content="MASt3R-Nav, Navigation, 3D, Visual Navigation, WayPixel, PixelReact">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MASt3R-Nav: WayPixel Navigation in Relative 3D Maps</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/favicon.svg">
 
@@ -24,92 +26,418 @@
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
 </head>
-
 <body>
 
 
-
-
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">MASt3R-Nav: WayPixel Navigation in Relative 3D Maps</h1>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block">
-                Anonymous Authors
-              </span>
-            </div>
-
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-
-  <section class="section">
+<section class="hero">
+  <div class="hero-body">
     <div class="container is-max-desktop">
-      <!-- Abstract. -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Abstract</h2>
-          <div class="content has-text-justified">
-            <p>
-              Visual navigation ability is strongly tied to its underlying representation of the world. Unlike classical
-              3D maps that require globally-consistent geometry, image- or object-relative topological graphs almost
-              entirely do away with geometric understanding. But, this comes at the cost of navigation capability, often
-              limiting it to merely teach-and-repeat. In this work, we propose a novel map representation in the form of
-              pixel-relative connectivity, which is geometrically accurate but does not require global geometric
-              consistency.
-            </p>
-            <p>
-              Inspired by recent progress in 3D grounded image matching, we construct a map from an image sequence
-              through inter-image connectivity based on pixel correspondences in the relative 3D coordinate systems of
-              individual image pairs. We then use this pixel-level graph to perform global path planning by
-              approximating and sparsifying intra-image pixel connectivity. Through this, we derive a "WayPixel Costmap"
-              representation and train a controller conditioned on it to predict a trajectory rollout.
-            </p>
-            <p>
-              We show that this dense pixel-level costmap based on relative geometry is a more accurate conditioning
-              variable for control prediction than its image- and object-level counterparts. This enables a highly
-              capable navigation system, as validated on four types of navigation tasks in the simulator and through
-              real world demonstrations.
-            </p>
-          </div>
-        </div>
-      </div>
-      <!--/ Abstract. -->
-
-
-    </div>
-  </section>
-
-
-
-
-
-
-
-
-  <footer class="footer">
-    <div class="container">
       <div class="columns is-centered">
-        <div class="column is-8">
-          <div class="content">
-            <p>
-              Website template borrowed from <a href="https://nerfies.github.io/">Nerfies</a>
-            </p>
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">MASt3R-Nav: WayPixel Navigation in Relative 3D Maps</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Anonymous Authors
+            </span>
           </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">ICRA 2026</span>
+          </div>
+
         </div>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./assets/fig1.png" alt="Overview of MASt3R-Nav" width="100%">
+      <h2 class="subtitle has-text-centered">
+        MASt3R-Nav constructs a pixel-level topological map from RGB sequences
+        and generates dense <i>WayPixel Costmaps</i> that guide a learned controller to the goal.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Visual navigation ability is strongly tied to its underlying representation of the world. Unlike classical
+            3D maps that require globally-consistent geometry, image- or object-relative topological graphs almost
+            entirely do away with geometric understanding. But, this comes at the cost of navigation capability, often
+            limiting it to merely teach-and-repeat. In this work, we propose a novel map representation in the form of
+            <i>pixel-relative connectivity</i>, which is geometrically accurate but does not require global geometric
+            consistency.
+          </p>
+          <p>
+            Inspired by recent progress in 3D grounded image matching, we construct a map from an image sequence
+            through inter-image connectivity based on pixel correspondences in the relative 3D coordinate systems of
+            individual image pairs. We then use this pixel-level graph to perform global path planning by
+            approximating and sparsifying intra-image pixel connectivity. Through this, we derive a
+            "<i>WayPixel Costmap</i>" representation and train a controller conditioned on it to predict a
+            trajectory rollout.
+          </p>
+          <p>
+            We show that this dense pixel-level costmap based on relative geometry is a more accurate conditioning
+            variable for control prediction than its image- and object-level counterparts. This enables a highly
+            capable navigation system, as validated on four types of navigation tasks in the simulator and through
+            real world demonstrations.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Architecture. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Method</h2>
+        <img src="./assets/overview.png" alt="MASt3R-Nav Architecture" width="100%">
+        <div class="content has-text-justified" style="margin-top: 1rem;">
+          <p>
+            <b>MASt3R-Nav Architecture.</b> <i>Mapping</i> involves constructing a pixel-level topological graph by
+            linking correspondences across frames and encoding traversal costs using 3D geometry from MASt3R.
+            <i>Execution</i> has the agent localize itself against the map and generate a fine-grained pixel costmap
+            by matching current observations and propagating their costs to all pixels.
+            <i>Planning</i> is performed by computing shortest paths through this costmap, yielding dense pixel-wise
+            gradients towards the goal. Finally, a neural controller consumes the pixel costmap to predict waypoints,
+            enabling a direct comparison with object-based baselines.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Architecture. -->
+
+    <br/>
+
+    <!-- WayPixel Costmap. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">WayPixel Costmap</h2>
+        <img src="./assets/planning.png" alt="WayPixel Costmap generation" width="100%">
+        <div class="content has-text-justified" style="margin-top: 1rem;">
+          <p>
+            <b>WayPixel Costmap generation.</b> Given the pixel-relative map representation and a query
+            (1), we obtain pixel-level planning costs through a series of steps that form a path highlighted
+            in white background (2) from the query pixel through matched and bridging map pixels to the goal.
+            (3) We show the flow of cost gradients from each pixel to its closest least-cost matched pixel and
+            (4) the final dense WayPixel Costmap on which we condition our trained controller <i>PixelReact</i>.
+            (5) shows the query RGB; the goal position is off-screen, toward the left of the scene.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ WayPixel Costmap. -->
+
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Results. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Results</h2>
+        <div class="content has-text-justified">
+          <p>
+            We evaluate on the HM3D IIN-val set across four navigation tasks: <b>Imitate</b>,
+            <b>Alt Goal</b>, <b>Shortcut</b>, and <b>Reverse</b>, reporting SPL and SSPL metrics.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table 1: Ablation -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Object-level vs. Pixel-level Representations</h3>
+        <div class="content">
+          <table class="table is-bordered is-striped is-hoverable is-fullwidth" style="font-size: 0.9rem; text-align: center;">
+            <thead>
+              <tr>
+                <th>Mapper</th>
+                <th>Localizer</th>
+                <th>Controller</th>
+                <th>SPL</th>
+                <th>SSPL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="5" style="background:#f5f5f5; font-weight:600;">Object-level Representation</td>
+              </tr>
+              <tr>
+                <td>LGlue</td><td>LGlue</td><td>ObjectReact</td>
+                <td>51.51</td><td>58.59</td>
+              </tr>
+              <tr>
+                <td>MASt3R</td><td>LGlue</td><td>ObjectReact</td>
+                <td>45.45</td><td>53.21</td>
+              </tr>
+              <tr>
+                <td>LGlue</td><td>MASt3R</td><td>ObjectReact</td>
+                <td>51.50</td><td>60.85</td>
+              </tr>
+              <tr>
+                <td>MASt3R</td><td>MASt3R</td><td>ObjectReact</td>
+                <td>51.48</td><td>58.64</td>
+              </tr>
+              <tr>
+                <td colspan="5" style="background:#f5f5f5; font-weight:600;">Pixel-level Representation</td>
+              </tr>
+              <tr>
+                <td>MASt3R</td><td>MASt3R</td><td>ObjectReact</td>
+                <td>63.63</td><td>74.11</td>
+              </tr>
+              <tr style="background:#f0f8f0; font-weight:600;">
+                <td>MASt3R</td><td>MASt3R</td><td>PixelReact (Ours)</td>
+                <td><b>81.77</b></td><td><b>84.36</b></td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            Comparison of object-level vs. pixel-level representations for image-goal navigation.
+            Replacing the object-level costmap with our pixel-relative WayPixel Costmap and PixelReact
+            controller substantially improves performance.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table 2: SotA -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">State-of-the-Art Comparison</h3>
+        <div class="content" style="overflow-x: auto;">
+          <table class="table is-bordered is-striped is-hoverable is-fullwidth" style="font-size: 0.85rem; text-align: center;">
+            <thead>
+              <tr>
+                <th rowspan="2" style="vertical-align:middle;">Method</th>
+                <th rowspan="2" style="vertical-align:middle;">Type</th>
+                <th rowspan="2" style="vertical-align:middle;">Train Data</th>
+                <th colspan="2">Imitate</th>
+                <th colspan="2">Alt Goal</th>
+                <th colspan="2">Shortcut</th>
+                <th colspan="2">Reverse</th>
+                <th colspan="2"><i>Average</i></th>
+              </tr>
+              <tr>
+                <th>SPL</th><th>SSPL</th>
+                <th>SPL</th><th>SSPL</th>
+                <th>SPL</th><th>SSPL</th>
+                <th>SPL</th><th>SSPL</th>
+                <th>SPL</th><th>SSPL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="13" style="background:#f5f5f5; font-weight:600;">Image-Relative</td>
+              </tr>
+              <tr>
+                <td>GNM</td><td>Image-Relative</td><td>Real</td>
+                <td>78.79</td><td>82.95</td>
+                <td>8.70</td><td>15.44</td>
+                <td>15.38</td><td>31.74</td>
+                <td>3.33</td><td>6.11</td>
+                <td>26.55</td><td>34.56</td>
+              </tr>
+              <tr>
+                <td>GNM (HM3D)</td><td>Image-Relative</td><td>HM3D</td>
+                <td>81.82</td><td>86.38</td>
+                <td>0.00</td><td>10.91</td>
+                <td>15.38</td><td>24.57</td>
+                <td>13.28</td><td>20.77</td>
+                <td>27.62</td><td>35.66</td>
+              </tr>
+              <tr>
+                <td colspan="13" style="background:#f5f5f5; font-weight:600;">Object-Relative</td>
+              </tr>
+              <tr>
+                <td>PixNav</td><td>Object-Relative</td><td>HM3D</td>
+                <td>42.42</td><td>46.75</td>
+                <td>26.09</td><td>31.66</td>
+                <td>7.69</td><td>22.29</td>
+                <td>16.16</td><td>25.56</td>
+                <td>23.09</td><td>31.57</td>
+              </tr>
+              <tr>
+                <td>RoboHop</td><td>Object-Relative</td><td>Zero Shot</td>
+                <td>57.56</td><td>64.99</td>
+                <td>30.43</td><td>38.23</td>
+                <td>30.77</td><td>40.87</td>
+                <td>9.98</td><td>16.92</td>
+                <td>32.19</td><td>40.25</td>
+              </tr>
+              <tr>
+                <td>ObjectReact</td><td>Object-Relative</td><td>HM3D</td>
+                <td>60.60</td><td>68.51</td>
+                <td>21.74</td><td>26.68</td>
+                <td>23.08</td><td>39.64</td>
+                <td><b>30.00</b></td><td><b>42.01</b></td>
+                <td><i>33.36</i></td><td><i>44.71</i></td>
+              </tr>
+              <tr>
+                <td colspan="13" style="background:#f5f5f5; font-weight:600;">Pixel-Relative</td>
+              </tr>
+              <tr style="background:#f0f8f0; font-weight:600;">
+                <td>MASt3R-Nav (Ours)</td><td>Pixel-Relative</td><td>HM3D</td>
+                <td><b>93.94</b></td><td><b>94.95</b></td>
+                <td><b>47.83</b></td><td><b>58.06</b></td>
+                <td><b>46.15</b></td><td><b>61.10</b></td>
+                <td>23.25</td><td>26.83</td>
+                <td><b>52.79</b></td><td><b>60.24</b></td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            State-of-the-art comparison of different control methods on four navigation tasks.
+            MASt3R-Nav outperforms all baselines on Imitate, Alt Goal, and Shortcut tasks by large margins,
+            achieving an absolute 10% improvement on Imitate over the prior best (GNM) and nearly
+            doubling the SPL/SSPL of object-relative methods on Alt Goal and Shortcut.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table 3: Scalability -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Scalability Study</h3>
+        <div class="content" style="overflow-x: auto;">
+          <table class="table is-bordered is-striped is-hoverable is-fullwidth" style="font-size: 0.85rem; text-align: center;">
+            <thead>
+              <tr>
+                <th colspan="2">Connectivity</th>
+                <th colspan="3">Topomap Graph Stats</th>
+                <th colspan="3">Computation Time (s)</th>
+                <th colspan="2">Navigation</th>
+              </tr>
+              <tr>
+                <th>EC</th><th>NC</th>
+                <th>Num Nodes</th><th>Intra-Frame Edges</th><th>Disk (MB)</th>
+                <th>Intra</th><th>Edge-Weight</th><th>Dijkstra</th>
+                <th>SPL</th><th>SSPL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Exhaustive</td><td>Sub10</td>
+                <td>24076</td><td>4660494</td><td>90.6</td>
+                <td>16.7</td><td>50.5</td><td>9.0</td>
+                <td>74.78</td><td>81.41</td>
+              </tr>
+              <tr style="background:#f0f8f0; font-weight:600;">
+                <td>EMST</td><td>Sub10</td>
+                <td>24076</td><td><b>24011</b></td><td><b>73.9</b></td>
+                <td>8.7</td><td><b>2.1</b></td><td><b>1.4</b></td>
+                <td><b>78.62</b></td><td><b>82.85</b></td>
+              </tr>
+              <tr>
+                <td>Delaunay 3D</td><td>Sub10</td>
+                <td>24076</td><td>167970</td><td>75.3</td>
+                <td><b>7.0</b></td><td>3.7</td><td>1.7</td>
+                <td>78.56</td><td><b>82.85</b></td>
+              </tr>
+              <tr>
+                <td>EMST</td><td>None</td>
+                <td>191281</td><td>191215</td><td>78.4</td>
+                <td>98.2</td><td>4.3</td><td>2.3</td>
+                <td>62.06</td><td>73.16</td>
+              </tr>
+              <tr>
+                <td>Delaunay 3D</td><td>None</td>
+                <td>191281</td><td>1418359</td><td>85.9</td>
+                <td>25.7</td><td>24.2</td><td>8.5</td>
+                <td>66.28</td><td>74.92</td>
+              </tr>
+              <tr style="border-top: 2px solid #b5b5b5;">
+                <td colspan="2">ObjectReact</td>
+                <td>1676</td><td>22633</td><td>4.76</td>
+                <td>--</td><td>--</td><td>0.011</td>
+                <td>60.60</td><td>68.51</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            Scalability study comparing inter- and intra-image connectivity strategies.
+            EMST with Sub10 subsampling reduces edges from 4.6M to 24K while maintaining navigation
+            performance, demonstrating that sparse pixel-level connectivity suffices for robot navigation.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Results. -->
+
+    <br/>
+
+    <!-- Real World. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Real World Demonstration</h2>
+        <img src="./assets/real_world_detailed.png" alt="Real World Demonstration" width="100%">
+        <div class="content has-text-justified" style="margin-top: 1rem;">
+          <p>
+            We deployed MASt3R-Nav on a P3DX mobile robot equipped with a RealSense camera for RGB
+            images. We show RGB observations, their WayPixel costmaps and the controller waypoints
+            towards the goal object (shaded in blue in image 4) on four different locations in the
+            robot trajectory. Despite being trained exclusively on the HM3D simulated dataset, our
+            navigation pipeline performs effectively during inference on a real-world mobile robot in
+            an unseen environment.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Real World. -->
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{mastrnav2026,
+  title     = {MASt3R-Nav: WayPixel Navigation in Relative 3D Maps},
+  author    = {Anonymous Authors},
+  booktitle = {International Conference on Robotics and Automation (ICRA)},
+  year      = {2026},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Website template borrowed from <a href="https://nerfies.github.io/">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
 
 </body>
-
 </html>
