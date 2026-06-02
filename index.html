@@ -177,7 +177,7 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
           <h2 class="title is-3">Method</h2>
-          <img src="./assets/overview.png" alt="MASt3R-Nav Architecture" width="100%">
+          <img src="./assets/pixelreact_pipeline_v3.png" alt="MASt3R-Nav Architecture" width="100%">
           <div class="content has-text-justified" style="margin-top: 1rem;">
             <p>
               <b>MASt3R-Nav Architecture.</b> <i>Mapping</i> involves constructing a pixel-level topological graph by
@@ -221,23 +221,43 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3">Mapping Visualization</h2>
+          <h2 class="title is-3">Mapping Phase: Relative 3D Pixel-Topological Graph Visualization</h2>
           <div class="content has-text-justified" style="margin-bottom: 1rem;">
 
-            <p>
-              This interactive view shows the map construction process in two synchronized panels.
+            <!-- <p>
+              This video demonstrates the map construction process.
               The left panel displays the sequential camera/image trajectory, while the right panel shows a side-by-side
               point-cloud view for the active frame pair.
               In both panels, we overlay inter-image and intra-image graph edges to highlight how local observations
               connect into a pixel-relative topological structure over time.
+            </p> -->
+
+            <p>
+              The following video demonstrates the incremental construction of our dense topological graph along the
+              robot's trajectory, with the current frame highlighted in yellow. As the sequence progresses, we visualize
+              the <strong>intra-frame edges</strong> (shown in light blue) and <strong>inter-frame edges</strong> (shown in various colors) connecting corresponding points across both the 2D image sequence and the 3D space.
             </p>
 
-            <p style="margin: 0 0 1rem 0; color: #555; font-size: 0.95rem;">
+            <div
+              style="background-color: #f8f9fa; border-left: 4px solid #6c757d; padding: 15px; margin-top: 20px; border-radius: 4px;">
+              <p style="margin: 0;">
+                <strong>Note:</strong> Ground truth poses and point clouds are used in this visualization strictly
+                for the purposes of better visualization. In practice, MASt3R-Nav operates entirely in relative 3D space, i.e. it does not construct a globally consistent or registered 3D metric map of the environment.
+              </p>
+            </div>
+
+            <!-- <p style="margin: 0 0 1rem 0; color: #555; font-size: 0.95rem;">
               Note: the visualization can take around <strong>~1 minute</strong> to fully load after opening.
-            </p>
+            </p> -->
           </div>
 
-          <div style="margin-bottom: 0.75rem;">
+          <div style="margin-bottom: 2rem;">
+            <video id="mapping-video" autoplay controls muted loop playsinline width="100%">
+              <source src="./assets/gt_global_pcd_with_edges_only_rgb_part.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <!-- <div style="margin-bottom: 0.75rem;">
             <button class="button is-small is-link"
               onclick="document.getElementById('viser-wrapper').requestFullscreen()">
               Full Screen
@@ -247,16 +267,16 @@
               target="_blank" rel="noopener">
               Open in New Tab
             </a>
-          </div>
+          </div> -->
 
-          <div id="viser-wrapper"
+          <!-- <div id="viser-wrapper"
             style="position: relative; width: 100%; padding-top: 56.25%; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
             <iframe
               src="https://app.rerun.io/?url=https://huggingface.co/datasets/vanshg1729/mast3r-nav-3d-viz/resolve/main/viz_side_by_side_v5_1.rrd"
               title="Viser Mapping Visualization" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen
               style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;">
             </iframe>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
