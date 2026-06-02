@@ -134,7 +134,6 @@
 
 
 
-
   <section class="section">
     <div class="container is-max-desktop">
 
@@ -252,14 +251,16 @@
             <p>
               The following video demonstrates the incremental construction of our dense topological graph along the
               robot's trajectory, with the current frame highlighted in yellow. As the sequence progresses, we visualize
-              the <strong>intra-frame edges</strong> (shown in light blue) and <strong>inter-frame edges</strong> (shown in various colors) connecting corresponding points across both the 2D image sequence and the 3D space.
+              the <strong>intra-frame edges</strong> (shown in light blue) and <strong>inter-frame edges</strong> (shown
+              in various colors) connecting corresponding points across both the 2D image sequence and the 3D space.
             </p>
 
             <div
               style="background-color: #f8f9fa; border-left: 4px solid #6c757d; padding: 15px; margin-top: 20px; border-radius: 4px;">
               <p style="margin: 0;">
                 <strong>Note:</strong> Ground truth poses and point clouds are used in this visualization strictly
-                for the purposes of better visualization. In practice, MASt3R-Nav operates entirely in relative 3D space, i.e. it does not construct a globally consistent or registered 3D metric map of the environment.
+                for the purposes of better visualization. In practice, MASt3R-Nav operates entirely in relative 3D
+                space, i.e. it does not construct a globally consistent or registered 3D metric map of the environment.
               </p>
             </div>
 
@@ -271,6 +272,16 @@
           <div style="margin-bottom: 2rem;">
             <video id="mapping-video" autoplay controls muted loop playsinline width="100%">
               <source src="./assets/gt_global_pcd_with_edges_only_rgb_part.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <p>
+            Below we have another video where we show the pointcloud generated using Mast3r Pointmaps and Mast3r's relative poses. While the global reconstruction isn't very accurate, it can still be used for navigation which is what we exploit while creating our 3D relative pixel topological graph of the environment.
+          </p>
+
+          <div style="margin-bottom: 2rem;">
+            <video id="mapping-video-mast3r" autoplay controls muted loop playsinline width="100%">
+              <source src="./assets/mast3r_pointmap_with_mast3r_poses_with_frames_fps10.mp4" type="video/mp4">
             </video>
           </div>
 
